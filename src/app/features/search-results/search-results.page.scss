@@ -1,0 +1,9 @@
+.search-results {
+  gap: var(--space-6);
+}
+
+.gallery {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}

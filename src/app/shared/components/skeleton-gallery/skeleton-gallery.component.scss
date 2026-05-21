@@ -1,0 +1,24 @@
+.skeleton-grid {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+.skeleton-card {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(105deg, var(--surface-2), var(--surface-3), var(--surface-2));
+  background-size: 220% 100%;
+  border: 1px solid var(--line);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+  100% {
+    background-position: -120% 0;
+  }
+}

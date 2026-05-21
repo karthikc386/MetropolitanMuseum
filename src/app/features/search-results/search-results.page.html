@@ -1,0 +1,20 @@
+<section class="page-section search-results">
+  @if (criteria$ | async; as criteria) {
+    <app-section-header eyebrow="Search results" [title]="'Results for ' + criteria.query" description="A routed result set that can be shared and revisited." />
+    <a class="button" routerLink="/discover">Refine search</a>
+  }
+
+  @if (results$ | async; as results) {
+    @if (results.length) {
+      <div class="gallery">
+        @for (artwork of results; track artwork.objectID) {
+          <app-artwork-card [artwork]="artwork" />
+        }
+      </div>
+    } @else {
+      <app-empty-state />
+    }
+  } @else {
+    <app-skeleton-gallery [count]="10" />
+  }
+</section>

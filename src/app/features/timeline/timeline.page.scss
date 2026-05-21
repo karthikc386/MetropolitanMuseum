@@ -1,0 +1,68 @@
+.timeline {
+  gap: var(--space-7);
+}
+
+.timeline-nav {
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(10rem, 1fr));
+  overflow-x: auto;
+}
+
+.timeline-nav button {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--line);
+  color: var(--text-muted);
+  cursor: pointer;
+  display: grid;
+  gap: .35rem;
+  min-height: 7rem;
+  padding: var(--space-4);
+  text-align: left;
+}
+
+.timeline-nav button.is-active {
+  background: var(--surface-1);
+  color: var(--text);
+}
+
+.timeline-nav span {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+}
+
+.timeline-stage {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 18rem 1fr;
+}
+
+.period-copy {
+  position: sticky;
+  top: 7rem;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-weight: 500;
+  line-height: .9;
+  margin: var(--space-3) 0 0;
+}
+
+.gallery {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+}
+
+@media (max-width: 780px) {
+  .timeline-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .period-copy {
+    position: static;
+  }
+}

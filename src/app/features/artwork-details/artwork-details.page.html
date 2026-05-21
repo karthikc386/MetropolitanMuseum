@@ -1,0 +1,51 @@
+@if (artwork$ | async; as artwork) {
+  <article class="detail">
+    <section class="detail__hero">
+      <div class="detail__image-wrap">
+        @if (artwork | artworkImage; as imageUrl) {
+          <img [src]="imageUrl" [alt]="artwork.title" decoding="async" />
+        } @else {
+          <div class="detail__fallback">The Met</div>
+        }
+      </div>
+
+      <div class="detail__intro">
+        <p class="eyebrow">{{ artwork.department }}</p>
+        <h1>{{ artwork.title || 'Untitled' }}</h1>
+        @if (artwork.artistDisplayName) {
+          <a class="artist-link" [routerLink]="['/artists', artwork.artistDisplayName]">{{ artwork.artistDisplayName }}</a>
+        }
+        <p>{{ artwork.objectDate }} · {{ artwork.medium }}</p>
+      </div>
+    </section>
+
+    <section class="page-section metadata">
+      <div>
+        <p class="eyebrow">Object record</p>
+        <h2>Material, place, and chronology.</h2>
+      </div>
+      <dl>
+        <div><dt>Culture</dt><dd>{{ artwork.culture || 'Unknown' }}</dd></div>
+        <div><dt>Period</dt><dd>{{ artwork.period || artwork.objectDate || 'Unknown' }}</dd></div>
+        <div><dt>Dimensions</dt><dd>{{ artwork.dimensions || 'Not listed' }}</dd></div>
+        <div><dt>Classification</dt><dd>{{ artwork.classification || artwork.objectName || 'Object' }}</dd></div>
+        <div><dt>Credit</dt><dd>{{ artwork.creditLine || 'The Metropolitan Museum of Art' }}</dd></div>
+        <div><dt>Timeline</dt><dd>{{ artwork.objectBeginDate }} - {{ artwork.objectEndDate }}</dd></div>
+      </dl>
+      <a class="button" [href]="artwork.objectURL" target="_blank" rel="noopener">Open Met record</a>
+    </section>
+
+    <section class="page-section">
+      <p class="eyebrow">Related artworks</p>
+      <div class="gallery">
+        @for (item of related$ | async; track item.objectID) {
+          <app-artwork-card [artwork]="item" />
+        }
+      </div>
+    </section>
+  </article>
+} @else {
+  <section class="page-section">
+    <app-skeleton-gallery [count]="4" />
+  </section>
+}

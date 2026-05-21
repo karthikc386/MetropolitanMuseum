@@ -1,0 +1,19 @@
+@if (artwork$ | async; as artwork) {
+  <section class="daily">
+    <div class="daily__art">
+      @if (artwork | artworkImage; as imageUrl) {
+        <img [src]="imageUrl" [alt]="artwork.title" decoding="async" />
+      }
+    </div>
+    <div class="daily__copy">
+      <p class="eyebrow">Daily artwork</p>
+      <h1>{{ artwork.title || 'Untitled' }}</h1>
+      <p>{{ artwork.artistDisplayName || artwork.culture || artwork.department }}</p>
+      <a class="button button--primary" [routerLink]="['/artworks', artwork.objectID]">Enter the object record</a>
+    </div>
+  </section>
+} @else {
+  <section class="page-section">
+    <app-skeleton-gallery [count]="2" />
+  </section>
+}

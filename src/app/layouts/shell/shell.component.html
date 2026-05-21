@@ -1,0 +1,40 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <a routerLink="/" class="brand" aria-label="The Met Digital Atelier home">
+    <span class="brand__mark">M</span>
+    <span>The Met<br />Digital Atelier</span>
+  </a>
+
+  <nav aria-label="Primary navigation">
+    @for (link of links; track link.path) {
+      <a
+        [routerLink]="link.path"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+      >
+        {{ link.label }}
+      </a>
+    }
+  </nav>
+
+  <button type="button" class="icon-button" (click)="theme.toggle()" [attr.aria-label]="'Toggle ' + theme.label()">
+    <span aria-hidden="true">{{ theme.darkMode() ? '◐' : '●' }}</span>
+  </button>
+</header>
+
+@if (errors.latestMessage(); as message) {
+  <aside class="api-error" role="status">
+    <span>{{ message }}</span>
+    <button type="button" (click)="errors.clear()" aria-label="Dismiss API notice">×</button>
+  </aside>
+}
+
+<main id="main" [@routeTransition]="routeKey(outlet)">
+  <router-outlet #outlet="outlet"></router-outlet>
+</main>
+
+<footer class="site-footer">
+  <p>The Metropolitan Museum of Art Collection API powers this experience.</p>
+  <a href="https://www.metmuseum.org/art/collection" target="_blank" rel="noopener">Visit The Met collection</a>
+</footer>

@@ -1,0 +1,20 @@
+.empty {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  display: grid;
+  gap: var(--space-2);
+  min-height: 18rem;
+  padding: var(--space-6);
+  place-content: center;
+  text-align: center;
+}
+
+h2,
+p {
+  margin: 0;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+}

@@ -1,0 +1,48 @@
+@if (vm$ | async; as vm) {
+  <section class="hero">
+    @if (vm.hero | artworkImage; as heroImage) {
+      <img class="hero__image" [src]="heroImage" [alt]="vm.hero.title" fetchpriority="high" decoding="async" />
+    }
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__content reveal">
+      <p class="eyebrow">Open collection</p>
+      <h1>The Met, reimagined as a cinematic digital archive.</h1>
+      <p>{{ vm.hero.title }} · {{ vm.hero.artistDisplayName || vm.hero.culture || 'The Metropolitan Museum of Art' }}</p>
+      <div class="actions">
+        <a class="button button--primary" [routerLink]="['/artworks', vm.hero.objectID]">View artwork</a>
+        <a class="button" routerLink="/discover">Explore archive</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <app-section-header
+      eyebrow="Curated rooms"
+      title="Collections shaped around light, material, and time."
+      description="Search-driven edits from the public Met collection, tuned for artwork-first browsing."
+    />
+
+    <div class="collection-grid">
+      @for (collection of vm.collections; track collection.title) {
+        <a class="collection-tile" [routerLink]="['/search']" [queryParams]="{ q: collection.query.query, departmentId: collection.query.departmentId }">
+          <span class="eyebrow">{{ collection.eyebrow }}</span>
+          <strong>{{ collection.title }}</strong>
+          <span>{{ collection.description }}</span>
+        </a>
+      }
+    </div>
+  </section>
+
+  <section class="page-section page-section--flush">
+    <app-section-header eyebrow="Featured works" title="A quiet carousel of collection highlights." />
+    <div class="rail" aria-label="Featured artworks">
+      @for (artwork of vm.featured; track trackArtwork($index, artwork)) {
+        <app-artwork-card [artwork]="artwork" />
+      }
+    </div>
+  </section>
+} @else {
+  <section class="page-section">
+    <app-skeleton-gallery [count]="6" />
+  </section>
+}

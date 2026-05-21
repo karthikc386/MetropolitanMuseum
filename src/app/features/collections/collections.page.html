@@ -1,0 +1,24 @@
+<section class="page-section collections">
+  <app-section-header
+    eyebrow="Collections"
+    title="Editorial galleries generated from live collection data."
+    description="Each room is a reusable feature model, ready for richer curation rules or CMS-backed edits."
+  />
+
+  @for (collection of collectionService.collections; track collection.title) {
+    <section class="collection-row">
+      <div>
+        <p class="eyebrow">{{ collection.eyebrow }}</p>
+        <h2>{{ collection.title }}</h2>
+        <p>{{ collection.description }}</p>
+        <a class="button" [routerLink]="['/search']" [queryParams]="{ q: collection.query.query, departmentId: collection.query.departmentId }">Open room</a>
+      </div>
+
+      <div class="mini-gallery">
+        @for (artwork of collectionService.collectionArtworks(collection, 4) | async; track artwork.objectID) {
+          <app-artwork-card [artwork]="artwork" />
+        }
+      </div>
+    </section>
+  }
+</section>

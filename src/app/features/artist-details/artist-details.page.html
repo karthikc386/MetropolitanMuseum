@@ -1,0 +1,25 @@
+<section class="page-section artist">
+  @if (artistName$ | async; as artistName) {
+    <app-section-header
+      eyebrow="Artist archive"
+      [title]="artistName"
+      description="A focused gallery assembled from artist and culture search records."
+    />
+  }
+
+  @if (artworks$ | async; as artworks) {
+    @if (artworks.length) {
+      <div class="artist__bio">
+        <p class="eyebrow">Chronology</p>
+        <p>{{ artworks[0].artistDisplayBio || 'Biographical details are limited in the public object record.' }}</p>
+      </div>
+      <div class="gallery">
+        @for (artwork of artworks; track artwork.objectID) {
+          <app-artwork-card [artwork]="artwork" />
+        }
+      </div>
+    } @else {
+      <app-empty-state title="Artist not found" message="Try a broader spelling or search by culture." />
+    }
+  }
+</section>

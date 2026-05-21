@@ -1,0 +1,16 @@
+.artist {
+  gap: var(--space-7);
+}
+
+.artist__bio {
+  border-left: 1px solid var(--line-strong);
+  color: var(--text-muted);
+  max-width: 52rem;
+  padding-left: var(--space-5);
+}
+
+.gallery {
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+}

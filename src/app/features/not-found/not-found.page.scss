@@ -1,0 +1,20 @@
+.not-found {
+  display: grid;
+  gap: var(--space-4);
+  min-height: 70dvh;
+  padding: var(--space-8) var(--page-gutter);
+  place-content: center;
+  text-align: center;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 9vw, 8rem);
+  font-weight: 500;
+  line-height: .9;
+  margin: 0;
+}
+
+p:not(.eyebrow) {
+  color: var(--text-muted);
+}

@@ -1,0 +1,34 @@
+<section class="page-section timeline">
+  <app-section-header
+    eyebrow="Timeline"
+    title="Move through centuries by object date."
+    description="Chronological browsing uses the Met API date filters and a horizontal period navigator."
+  />
+
+  <div class="timeline-nav" role="tablist" aria-label="Timeline periods">
+    @for (period of periods; track period.label; let i = $index) {
+      <button
+        type="button"
+        role="tab"
+        [class.is-active]="i === activeIndex()"
+        [attr.aria-selected]="i === activeIndex()"
+        (click)="activeIndex.set(i)"
+      >
+        <span>{{ period.label }}</span>
+        <small>{{ period.range }}</small>
+      </button>
+    }
+  </div>
+
+  <div class="timeline-stage">
+    <div class="period-copy">
+      <p class="eyebrow">{{ activePeriod().range }}</p>
+      <h2>{{ activePeriod().label }}</h2>
+    </div>
+    <div class="gallery">
+      @for (artwork of artworks$ | async; track artwork.objectID) {
+        <app-artwork-card [artwork]="artwork" />
+      }
+    </div>
+  </div>
+</section>

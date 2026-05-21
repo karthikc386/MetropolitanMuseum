@@ -1,0 +1,23 @@
+<article class="art-card">
+  <a [routerLink]="['/artworks', artwork().objectID]" class="art-card__media" [attr.aria-label]="'Open ' + artwork().title">
+    @if (artwork() | artworkImage; as imageUrl) {
+      <img
+        [src]="imageUrl"
+        [alt]="artwork().title || 'Artwork from The Metropolitan Museum of Art'"
+        [attr.loading]="priority() ? 'eager' : 'lazy'"
+        decoding="async"
+      />
+    } @else {
+      <div class="art-card__fallback" aria-hidden="true">The Met</div>
+    }
+  </a>
+
+  <div class="art-card__body">
+    <p class="eyebrow">{{ artwork().department || artwork().classification || 'Collection' }}</p>
+    <h3>
+      <a [routerLink]="['/artworks', artwork().objectID]">{{ artwork().title || 'Untitled' }}</a>
+    </h3>
+    <p class="muted">{{ artwork().artistDisplayName || artwork().culture || 'Unknown artist' }}</p>
+    <p class="meta">{{ artwork().objectDate || artwork().medium }}</p>
+  </div>
+</article>

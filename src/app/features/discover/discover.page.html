@@ -1,0 +1,46 @@
+<section class="page-section discover">
+  <app-section-header
+    eyebrow="Discover"
+    title="Search the archive like a private viewing room."
+    description="Filter by department, artists, cultures, and image availability through the public Met Collection API."
+  />
+
+  <form class="search-panel" [formGroup]="form" (ngSubmit)="searchCollection()">
+    <label>
+      Search
+      <input formControlName="query" type="search" placeholder="Try: van gogh, kimono, bronze, egypt" />
+    </label>
+
+    <label>
+      Department
+      <select formControlName="departmentId">
+        <option value="">All departments</option>
+        @for (department of departments$ | async; track department.departmentId) {
+          <option [value]="department.departmentId">{{ department.displayName }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="check">
+      <input formControlName="artistOrCulture" type="checkbox" />
+      <span>Artist or culture</span>
+    </label>
+
+    <button class="button button--primary" type="submit">Search</button>
+  </form>
+
+  @if (results$ | async; as artworks) {
+    @if (artworks.length) {
+      <div class="masonry">
+        @for (artwork of artworks.slice(0, visibleCount()); track artwork.objectID) {
+          <app-artwork-card [artwork]="artwork" />
+        }
+      </div>
+      <button type="button" class="button load-more" (click)="loadMore()">Load more</button>
+    } @else {
+      <app-empty-state title="No artworks found" message="Refine the query or choose a broader department." />
+    }
+  } @else {
+    <app-skeleton-gallery [count]="12" />
+  }
+</section>
