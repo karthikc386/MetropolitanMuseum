@@ -1,0 +1,1 @@
+import{b as n}from"./chunk-RVG7GMZY.js";import{a as o,b as a,u as i,y as c}from"./chunk-SXF65TB5.js";var s=class r{artworks=c(n);search(t,e=36){return this.artworks.searchArtworks(a(o({hasImages:!0},t),{query:t.query.trim()||"painting"}),e)}static \u0275fac=function(e){return new(e||r)};static \u0275prov=i({token:r,factory:r.\u0275fac,providedIn:"root"})};export{s as a};
